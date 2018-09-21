@@ -30,7 +30,6 @@ public class Interface extends JFrame {
 	static JMenuItem miSair = new JMenuItem("Sair");
 	
 	static JMenu mnCadastros = new JMenu("Cadastros");
-	static JMenuItem miClientes = new JMenuItem("Clientes");
 	static JMenuItem miEstadia = new JMenuItem("Estadia");
 	
 	static JMenu mnHistorico = new JMenu("Histórico");
@@ -75,6 +74,9 @@ public class Interface extends JFrame {
 	static JTable tbDados = new JTable(modeloCliente);
 
 	static JScrollPane painelScrollClientes = new JScrollPane(tbDados);
+	
+	static JFrame reserva = new Reserva();
+	static JFrame histCli = new HistoricoClientes();
 
 	public Interface() {
 		setTitle("Controle de Clientes");
@@ -92,7 +94,6 @@ public class Interface extends JFrame {
 		mnArquivo.add(miSair);
 		
 		menuBar.add(mnCadastros);
-		mnCadastros.add(miClientes);
 		mnCadastros.add(miEstadia);
 		
 		menuBar.add(mnHistorico);
@@ -202,15 +203,9 @@ public class Interface extends JFrame {
 		
 		//---
 		
-		miClientes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		
 		miEstadia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame reserva = new Reserva();
+				reserva.setVisible(true);
 			}
 		});
 		
@@ -218,7 +213,7 @@ public class Interface extends JFrame {
 		
 		miClientes_hist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				histCli.setVisible(true);
 			}
 		});
 		

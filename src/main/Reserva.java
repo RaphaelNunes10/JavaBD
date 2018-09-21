@@ -45,7 +45,6 @@ public class Reserva extends JFrame {
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation((tela.width - getSize().width) / 2,
 				(tela.height - getSize().height) / 2);
-		setVisible(true);
 	}
 	
 	public static void criarElementos() {
