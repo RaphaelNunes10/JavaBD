@@ -10,6 +10,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class HistoricoClientes extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	static JTextField tfPesquisa = new JTextField();
 	static JButton btPesquisar = new JButton("Pesquisar");
 	

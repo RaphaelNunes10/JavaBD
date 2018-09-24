@@ -7,20 +7,13 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
-public class Interface extends JFrame {
+public class TelaCadastro extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	final static String driver = "com.mysql.jdbc.Driver";
-	final static String url = "jdbc:mysql://localhost:3306/empregadora"; // alterar conex�o e porta de acordo com o
-																			// server mySQL sendo utilizado no momento.
-	final static String user = "root";
-	final static String senha = "root";
 
 	static JMenuBar menuBar = new JMenuBar();
 
@@ -67,7 +60,7 @@ public class Interface extends JFrame {
 
 	static Object[][] dados = { { "", "", "", "", "", "" } };
 
-	static String[] colunasCliente = { "Nº Quarto", "Nome", "RG", "Phone Quarto", "Entrada", "Saida" };
+	static String[] colunasCliente = { "N# Quarto", "Nome", "RG", "Phone Quarto", "Entrada", "Saida" };
 
 	static DefaultTableModel modeloCliente = new DefaultTableModel();
 
@@ -78,12 +71,10 @@ public class Interface extends JFrame {
 	static JFrame reserva = new Reserva();
 	static JFrame histCli = new HistoricoClientes();
 
-	public Interface() {
+	public TelaCadastro() {
 		setTitle("Controle de Clientes");
 		setBounds(0, 0, 950, 550);
 		setLayout(null);
-		
-		JOptionPane.showMessageDialog(null, "Conexão aberta!");
 
 		criarElementos();
 
@@ -129,7 +120,7 @@ public class Interface extends JFrame {
 		add(btExcluir);
 		add(btSair);
 
-		modeloCliente.addColumn("Nº Quarto");
+		modeloCliente.addColumn("N# Quarto");
 		modeloCliente.addColumn("Nome");
 		modeloCliente.addColumn("RG");
 		modeloCliente.addColumn("Phone Quarto");
@@ -142,7 +133,6 @@ public class Interface extends JFrame {
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation((tela.width - getSize().width) / 2,
 				(tela.height - getSize().height) / 2);
-		setVisible(true);
 
 	}
 
@@ -229,31 +219,31 @@ public class Interface extends JFrame {
 
 		btInserir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Botoes.inserir();
+				FuncoesCliente.inserir();
 			}
 		});
 
 		btBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Botoes.buscar();
+				FuncoesCliente.buscar();
 			}
 		});
 
 		btAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Botoes.alterar();
+				FuncoesCliente.alterar();
 			}
 		});
 
 		btExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Botoes.excluir();
+				FuncoesCliente.excluir();
 			}
 		});
 
 		btSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Botoes.sair();
+				FuncoesCliente.sair();
 			}
 		});
 

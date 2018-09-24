@@ -1,17 +1,11 @@
 package main;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class Main extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/*
@@ -27,15 +21,18 @@ public class Main extends JFrame {
 	public static void main(String[] args) {
 
 		try {
-			Class.forName(Interface.driver);
+			Class.forName(Conexao.driver);
 
-			Interface.definirEventos();
+			Login.definirEventos();
+			TelaCadastro.definirEventos();
 
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					JFrame frame = new Interface();
-
-					Botoes.atualizar();
+					JFrame login = new Login();
+					
+					login.setVisible(true);
+					
+					
 				}
 			});
 		} catch (ClassNotFoundException e) {

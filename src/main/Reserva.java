@@ -9,6 +9,10 @@ import javax.swing.*;
 
 public class Reserva extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	static JLabel lbRG = new JLabel("RG: ");
 	static JLabel lbEntrada = new JLabel("Entrada: ");
 	static JLabel lbSaida = new JLabel("Saida: ");
