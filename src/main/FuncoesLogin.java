@@ -1,38 +1,40 @@
 package main;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class FuncoesLogin {
-	
-	static TelaCadastro interfce = new TelaCadastro();
 	
 	public static void sair() {
 		System.exit(0);
 	}
 	
 	public static void logar() {
-		String sql = "SELECT usuario, senha FROM Usuario WHERE usuario = ? AND senha = ?";
+		
+		String sql = "SELECT Nome, Senha FROM Usuario WHERE Nome = ? AND Senha = ?";
 		
 		try {
-			Connection conex = DriverManager.getConnection(Conexao.url, Conexao.user, Conexao.senha);
+			Conexao.abrirConexao();
 			
-			PreparedStatement statement = conex.prepareStatement(sql);
+			PreparedStatement statement = Conexao.conex.prepareStatement(sql);
 			
 			String usuario = Login.tfUsuario.getText();
 			statement.setString(1, usuario);
 			
-			String senha = Login.tfSenha.getText();
-			statement.setString(2, senha);
+			char[] senha = Login.tfSenha.getPassword();
+			statement.setString(2, String.valueOf(senha));
 			
 			ResultSet result = statement.executeQuery();
 			
 			if(result.next()) {
-				interfce.setVisible(true);
+				Main.login.dispose();
+				Main.cadastro.setVisible(true);
 				FuncoesCliente.atualizar();
+			} else {
+				JOptionPane.showMessageDialog(null, "Usuario nao existe!");
+				Conexao.fecharConexao();
 			}
 			
 		} catch (SQLException e) {

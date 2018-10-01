@@ -18,7 +18,6 @@ public class TelaCadastro extends JFrame {
 	static JMenuBar menuBar = new JMenuBar();
 
 	static JMenu mnArquivo = new JMenu("Arquivo");
-	static JMenuItem miLogin = new JMenuItem("Login");
 	static JMenuItem miLogout = new JMenuItem("Logout");
 	static JMenuItem miSair = new JMenuItem("Sair");
 	
@@ -44,7 +43,7 @@ public class TelaCadastro extends JFrame {
 
 	static Object[][] quartos = { { "", "", "", "", "" } };
 
-	static String[] colunasQuarto = { "0-10", "11-20", "21-30", "31-40", "41-50" };
+	static String[] colunasQuarto = { "1-10", "11-20", "21-30", "31-40", "41-50" };
 
 	static DefaultTableModel modeloQuartos = new DefaultTableModel();
 
@@ -67,19 +66,17 @@ public class TelaCadastro extends JFrame {
 	static JTable tbDados = new JTable(modeloCliente);
 
 	static JScrollPane painelScrollClientes = new JScrollPane(tbDados);
-	
-	static JFrame reserva = new Reserva();
-	static JFrame histCli = new HistoricoClientes();
 
 	public TelaCadastro() {
 		setTitle("Controle de Clientes");
 		setBounds(0, 0, 950, 550);
 		setLayout(null);
-
+		
+		
+		
 		criarElementos();
 
 		menuBar.add(mnArquivo);
-		mnArquivo.add(miLogin);
 		mnArquivo.add(miLogout);
 		mnArquivo.addSeparator();
 		mnArquivo.add(miSair);
@@ -106,13 +103,15 @@ public class TelaCadastro extends JFrame {
 		add(tfTelefone2);
 		add(tfEmail);
 
-		modeloQuartos.addColumn("0-10");
+		modeloQuartos.addColumn("1-10");
 		modeloQuartos.addColumn("11-20");
 		modeloQuartos.addColumn("21-30");
 		modeloQuartos.addColumn("31-40");
 		modeloQuartos.addColumn("41-50");
 
 		add(painelScrollQuartos);
+		
+		FuncoesCliente.buscarQuartos();
 
 		add(btInserir);
 		add(btBuscar);
@@ -133,7 +132,6 @@ public class TelaCadastro extends JFrame {
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation((tela.width - getSize().width) / 2,
 				(tela.height - getSize().height) / 2);
-
 	}
 
 	/**
@@ -173,15 +171,10 @@ public class TelaCadastro extends JFrame {
 	 */
 	public static void definirEventos() {
 		
-		miLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		
 		miLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Main.cadastro.dispose();
+				Main.login.setVisible(true);
 			}
 		});
 		
@@ -195,7 +188,7 @@ public class TelaCadastro extends JFrame {
 		
 		miEstadia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				reserva.setVisible(true);
+				Main.reserva.setVisible(true);
 			}
 		});
 		
@@ -203,7 +196,7 @@ public class TelaCadastro extends JFrame {
 		
 		miClientes_hist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				histCli.setVisible(true);
+				Main.histCli.setVisible(true);
 			}
 		});
 		

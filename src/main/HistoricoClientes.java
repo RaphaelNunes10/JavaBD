@@ -73,10 +73,10 @@ public class HistoricoClientes extends JFrame {
 		
 		add(painelScrollEstadia);
 		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);		
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation((tela.width - getSize().width) / 2,
 				(tela.height - getSize().height) / 2);
-		
 	}
 	
 	public static void criarElementos() {

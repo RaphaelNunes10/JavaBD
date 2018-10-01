@@ -17,22 +17,25 @@ public class Main extends JFrame {
 	 * NULL Posicao varchar(50) NOT NULL Cargo varchar(50) NOT NULL
 	 * ----------------------------------------------
 	 */
+	
+	static JFrame login =  new Login();
+	static JFrame cadastro = new TelaCadastro();
+	static JFrame reserva = new Reserva();
+	static JFrame histCli = new HistoricoClientes();
 
 	public static void main(String[] args) {
-
+		
 		try {
+			
 			Class.forName(Conexao.driver);
 
-			Login.definirEventos();
-			TelaCadastro.definirEventos();
-
 			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					JFrame login = new Login();
-					
+				public void run() {			
 					login.setVisible(true);
-					
-					
+					Login.definirEventos();
+					TelaCadastro.definirEventos();
+					Reserva.definirEventos();
+					HistoricoClientes.definirEventos();
 				}
 			});
 		} catch (ClassNotFoundException e) {
