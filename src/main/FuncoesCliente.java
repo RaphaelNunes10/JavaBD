@@ -1,9 +1,11 @@
 package main;
 
+import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -12,14 +14,13 @@ import java.util.Date;
 public class FuncoesCliente {
 
 	public static void buscarQuartos() {
-
-		TelaCadastro.modeloCliente.setRowCount(0);
-
+		
 		for (int i = 0; i < 10; i++) {
 			TelaCadastro.modeloQuartos.addRow(new Object[] { i+1, i+11, i+21, i+31, i+41 });
-		}
-
-		TelaCadastro.tbQuartos = new JTable(TelaCadastro.quartos, TelaCadastro.colunasQuarto);
+	}
+		
+	TelaCadastro.tbQuartos = new JTable(TelaCadastro.quartos, TelaCadastro.colunasQuarto);
+	
 	}
 
 	public static void checarEstadia() {

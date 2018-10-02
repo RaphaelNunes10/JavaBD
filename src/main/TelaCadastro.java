@@ -22,12 +22,10 @@ public class TelaCadastro extends JFrame {
 	static JMenuItem miSair = new JMenuItem("Sair");
 	
 	static JMenu mnCadastros = new JMenu("Cadastros");
-	static JMenuItem miEstadia = new JMenuItem("Estadia");
+	static JMenuItem miReserva = new JMenuItem("Reserva");
 	
 	static JMenu mnHistorico = new JMenu("Histórico");
 	static JMenuItem miClientes_hist = new JMenuItem("Clientes");
-	
-	static JMenu mnSobre = new JMenu("Sobre");
 
 	static JLabel lbNome = new JLabel("Nome: ");
 	static JLabel lbRg = new JLabel("Rg: ");
@@ -82,12 +80,10 @@ public class TelaCadastro extends JFrame {
 		mnArquivo.add(miSair);
 		
 		menuBar.add(mnCadastros);
-		mnCadastros.add(miEstadia);
+		mnCadastros.add(miReserva);
 		
 		menuBar.add(mnHistorico);
 		mnHistorico.add(miClientes_hist);
-		
-		menuBar.add(mnSobre);
 
 		setJMenuBar(menuBar);
 
@@ -186,7 +182,7 @@ public class TelaCadastro extends JFrame {
 		
 		//---
 		
-		miEstadia.addActionListener(new ActionListener() {
+		miReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.reserva.setVisible(true);
 			}
@@ -197,14 +193,6 @@ public class TelaCadastro extends JFrame {
 		miClientes_hist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.histCli.setVisible(true);
-			}
-		});
-		
-		//---
-		
-		mnSobre.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
 			}
 		});
 		

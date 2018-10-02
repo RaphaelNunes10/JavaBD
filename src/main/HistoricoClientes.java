@@ -109,7 +109,7 @@ public class HistoricoClientes extends JFrame {
 		
 		btPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				FuncoesHistCli.buscar();
 			}
 		});
 		
