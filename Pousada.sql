@@ -5,8 +5,8 @@ use Pousada;
 create table if not exists Cliente(
     Rg int (20) primary key not null,
     Nome varchar (100) not null,
-    Email varchar (60)not null,
-    Telefone varchar (10),
+    Email varchar (60),
+    Telefone varchar (10) not null,
     Celular varchar (11)
 );
 
@@ -35,8 +35,11 @@ create table if not exists Produto(
 create table if not exists Financeiro(
     Id int (11) primary key not null auto_increment,
     Id_Cliente int (11) not null,
-    CNPJ_Colaborador varchar (18),
-    Id_Reserva int (11) not null
+    CNPJ_Colaborador varchar (18) not null,
+    Id_Reserva int (11) not null,
+    foreign key (Id_Cliente) references Cliente (Rg),
+    foreign key (CNPJ_Colaborador) references Colaborador (CNPJ),
+    foreign key (Id_Reserva) references Reserva (Id) 
 );
 
 create table if not exists Reserva(
@@ -61,9 +64,12 @@ create table if not exists Endereco(
     CEP varchar (80) primary key not null,
     Rg_Cliente int (11) not null,
     CNPJ_Colaborador varchar (18) not null,
+    Cidade varchar (30) not null,
     Rua varchar (30) not null,
     Bairro varchar (30) not null,
-    numero int (5) not null
+    Numero int (5) not null,
+    foreign key (Rg_Cliente) references Cliente (Rg),
+    foreign key (CNPJ_Colaborador) references Colaborador (CNPJ)
 );
 
 create table if not exists Usuario(
@@ -72,12 +78,12 @@ create table if not exists Usuario(
     Senha varchar(255) not null
 );
 
-#Criando os users
+# Criando os users
 
-#Erro
-create user "pousada"@"localhost" identified by "rr";
-create user "pousada"@"%" identified by "rr";
-#Erro
+# Erro
+# create user "pousada"@"localhost" identified by "rr";
+# create user "pousada"@"%" identified by "rr";
+# Erro
 
 grant all privileges on Pousada . * to "pousada"@"localhost";
 grant all privileges on Pousada . * to "pousada"@"%";

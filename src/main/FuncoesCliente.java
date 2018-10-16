@@ -57,6 +57,19 @@ public class FuncoesCliente {
 			JOptionPane.showMessageDialog(null, "Erro ao checar estadia!");
 		}
 	}
+	
+	public static void buscarEndereco() {
+		
+		WebServiceCep wsCep = WebServiceCep.searchCep(TelaCadastro.tfCep.getText());
+		
+		if (wsCep.wasSuccessful()) {
+		TelaCadastro.tfCidade.setText(wsCep.getCidade() + "/" + wsCep.getUf());
+		TelaCadastro.tfBairro.setText(wsCep.getBairro());
+		TelaCadastro.tfRua.setText(wsCep.getLogradouro());
+		} else {
+			JOptionPane.showMessageDialog(null, "CEP Incorreto!");
+		}
+	}
 
 	/**
 	 * Atualiza os dados no JTable.
@@ -106,11 +119,13 @@ public class FuncoesCliente {
 
 	public static void inserir() {
 		String sql = "INSERT INTO Cliente VALUES (?,?,?,?,?)";
+		String sql2 = "INSERT INTO Endereco (CEP, RgCliente, Cidade, Rua, Bairro, Numero) VALUES (?,?,?,?,?,?)";
 
 		try {
 			Conexao.abrirConexao();
 
 			PreparedStatement statement = Conexao.conex.prepareStatement(sql);
+			PreparedStatement statement2 = Conexao.conex.prepareStatement(sql2);
 
 			String rg = TelaCadastro.tfRg.getText();
 			statement.setString(1, rg);
@@ -126,9 +141,30 @@ public class FuncoesCliente {
 
 			String telefone2 = TelaCadastro.tfTelefone2.getText();
 			statement.setString(5, telefone2);
+			
+			//--
+			
+			String cep = TelaCadastro.tfCep.getText();
+			statement2.setString(1, cep);
+			
+			String rgCliente = TelaCadastro.tfRg.getText();
+			statement2.setString(2, rgCliente);
+			
+			String cidade = TelaCadastro.tfCidade.getText();
+			statement2.setString(3, cidade);
+			
+			String rua = TelaCadastro.tfRua.getText();
+			statement2.setString(4, rua);
+			
+			String bairro = TelaCadastro.tfBairro.getText();
+			statement2.setString(5, bairro);
+			
+			String numero = TelaCadastro.tfNu.getText();
+			statement2.setString(6, numero);
 
 			int rowsInserted = statement.executeUpdate();
-			if (rowsInserted > 0) {
+			int rowsInserted2 = statement2.executeUpdate();
+			if (rowsInserted > 0 && rowsInserted2 > 0) {
 				Main.reserva.setVisible(true);
 			}
 

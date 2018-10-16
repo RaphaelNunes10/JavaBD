@@ -27,17 +27,31 @@ public class TelaCadastro extends JFrame {
 	static JMenu mnHistorico = new JMenu("Histórico");
 	static JMenuItem miClientes_hist = new JMenuItem("Clientes");
 
-	static JLabel lbNome = new JLabel("Nome: ");
-	static JLabel lbRg = new JLabel("Rg: ");
-	static JLabel lbTelefone1 = new JLabel("Phone: ");
-	static JLabel lbTelefone2 = new JLabel("Phone(alternativo): ");
-	static JLabel lbEmail = new JLabel("Email: ");
+	static JLabel lbNome = new JLabel("Nome ");
+	static JLabel lbRg = new JLabel("Rg ");
+	static JLabel lbTelefone1 = new JLabel("Phone ");
+	static JLabel lbTelefone2 = new JLabel("Phone(alternativo) ");
+	static JLabel lbEmail = new JLabel("Email ");
+	
+	static JLabel lbCep = new JLabel("CEP ");
+	static JLabel lbCidade = new JLabel("Cidade/UF ");
+	static JLabel lbBairro = new JLabel("Bairro ");
+	static JLabel lbRua = new JLabel("Rua ");
+	static JLabel lbNu = new JLabel("n# ");
 
 	static JTextField tfNome = new JTextField(150);
 	static JTextField tfRg = new JTextField(14);
 	static JTextField tfTelefone1 = new JTextField(20);
 	static JTextField tfTelefone2 = new JTextField(20);
 	static JTextField tfEmail = new JTextField(150);
+	
+	static JTextField tfCep = new JTextField(20);
+	static JTextField tfCidade = new JTextField(50);
+	static JTextField tfBairro = new JTextField(150);
+	static JTextField tfRua = new JTextField(150);
+	static JTextField tfNu = new JTextField(10);
+	
+	static JButton btBuscaCep = new JButton("Buscar");
 
 	static Object[][] quartos = { { "", "", "", "", "" } };
 
@@ -51,7 +65,7 @@ public class TelaCadastro extends JFrame {
 
 	static JButton btInserir = new JButton("Inserir");
 	static JButton btBuscar = new JButton("Buscar");
-	static JButton btAlterar = new JButton("Alterar");
+	static JButton btAlterar = new JButton("Editar");
 	static JButton btExcluir = new JButton("Excluir");
 	static JButton btSair = new JButton("Sair");
 
@@ -67,11 +81,9 @@ public class TelaCadastro extends JFrame {
 
 	public TelaCadastro() {
 		setTitle("Controle de Clientes");
-		setBounds(0, 0, 950, 550);
+		setBounds(0, 0, 950, 600);
 		setLayout(null);
-		
-		
-		
+
 		criarElementos();
 
 		menuBar.add(mnArquivo);
@@ -92,12 +104,26 @@ public class TelaCadastro extends JFrame {
 		add(lbTelefone1);
 		add(lbTelefone2);
 		add(lbEmail);
+		
+		add(lbCep);
+		add(lbCidade);
+		add(lbBairro);
+		add(lbRua);
+		add(lbNu);
+		
+		add(btBuscaCep);
 
 		add(tfNome);
 		add(tfRg);
 		add(tfTelefone1);
 		add(tfTelefone2);
 		add(tfEmail);
+		
+		add(tfCep);
+		add(tfCidade);
+		add(tfBairro);
+		add(tfRua);
+		add(tfNu);
 
 		modeloQuartos.addColumn("1-10");
 		modeloQuartos.addColumn("11-20");
@@ -134,32 +160,46 @@ public class TelaCadastro extends JFrame {
 	 * Cria e posiciona os elementos da janela.
 	 */
 	public static void criarElementos() {
-		lbNome.setBounds(10, 10, 100, 25);
-		tfNome.setBounds(150, 10, 322, 25);
-		lbRg.setBounds(10, 40, 100, 25);
-		tfRg.setBounds(150, 40, 322, 25);
-		lbTelefone1.setBounds(10, 70, 100, 25);
-		tfTelefone1.setBounds(150, 70, 322, 25);
-		lbTelefone2.setBounds(10, 100, 400, 25);
-		tfTelefone2.setBounds(150, 100, 322, 25);
-		lbEmail.setBounds(10, 130, 100, 25);
-		tfEmail.setBounds(150, 130, 322, 25);
+		lbNome.setBounds(15, 10, 200, 25);
+		tfNome.setBounds(10, 30, 225, 25);
+		lbRg.setBounds(15, 50, 200, 25);
+		tfRg.setBounds(10, 70, 225, 25);
+		lbTelefone1.setBounds(15, 90, 200, 25);
+		tfTelefone1.setBounds(10, 110, 225, 25);
+		lbTelefone2.setBounds(15, 130, 200, 25);
+		tfTelefone2.setBounds(10, 150, 225, 25);
+		lbEmail.setBounds(15, 170, 200, 25);
+		tfEmail.setBounds(10, 190, 225, 25);
+		
+		lbCep.setBounds(255, 10, 200, 25);
+		tfCep.setBounds(250, 30, 200, 25);
+		
+		btBuscaCep.setBounds(450, 30, 25, 25);
+		
+		lbCidade.setBounds(255, 50, 200, 25);
+		tfCidade.setBounds(250, 70, 225, 25);
+		lbBairro.setBounds(255, 90, 200, 25);
+		tfBairro.setBounds(250, 110, 225, 25);
+		lbRua.setBounds(255, 130, 200, 25);
+		tfRua.setBounds(250, 150, 225, 25);
+		lbNu.setBounds(255, 170, 200, 25);
+		tfNu.setBounds(250, 190, 225, 25);
 
-		tbQuartos.setBounds(500, 10, 422, 170);
+		tbQuartos.setBounds(500, 30, 422, 183);
 		tbQuartos.setFillsViewportHeight(true);
 
-		painelScrollQuartos.setBounds(500, 10, 422, 170);
+		painelScrollQuartos.setBounds(500, 30, 422, 183);
 
-		btInserir.setBounds(10, 160, 90, 25);
-		btBuscar.setBounds(103, 160, 90, 25);
-		btAlterar.setBounds(196, 160, 90, 25);
-		btExcluir.setBounds(289, 160, 90, 25);
-		btSair.setBounds(382, 160, 90, 25);
+		btInserir.setBounds(10, 225, 90, 25);
+		btBuscar.setBounds(103, 225, 90, 25);
+		btAlterar.setBounds(196, 225, 90, 25);
+		btExcluir.setBounds(289, 225, 90, 25);
+		btSair.setBounds(382, 225, 90, 25);
 
-		tbDados.setBounds(10, 190, 913, 290);
+		tbDados.setBounds(10, 260, 913, 265);
 		tbDados.setFillsViewportHeight(true);
 
-		painelScrollClientes.setBounds(10, 190, 913, 290);
+		painelScrollClientes.setBounds(10, 260, 913, 265);
 	}
 
 	/**
@@ -193,6 +233,14 @@ public class TelaCadastro extends JFrame {
 		miClientes_hist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.histCli.setVisible(true);
+			}
+		});
+		
+		//---
+		
+		btBuscaCep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuncoesCliente.buscarEndereco();
 			}
 		});
 		

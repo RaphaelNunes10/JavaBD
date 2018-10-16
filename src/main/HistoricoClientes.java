@@ -32,6 +32,9 @@ public class HistoricoClientes extends JFrame {
 	static JLabel lbPhone2 =  new JLabel("Phone (alternativo): ");
 	static JLabel lbCampoPhone2 =  new JLabel("-");
 	
+	static JLabel lbEndereco = new JLabel("Endereco: ");
+	static JLabel lbCampoEndereco = new JLabel("-");
+	
 	static Object[][] estadia = { { "", "" } };
 	
 	static String[] colunasEstadia = { "Entrada", "Saída" };
@@ -68,6 +71,9 @@ public class HistoricoClientes extends JFrame {
 		add(lbPhone2);
 		add(lbCampoPhone2);
 		
+		add(lbEndereco);
+		add(lbCampoEndereco);
+		
 		modeloEstadia.addColumn("Entrada");
 		modeloEstadia.addColumn("Saída");
 		
@@ -84,20 +90,23 @@ public class HistoricoClientes extends JFrame {
 		tfPesquisa.setBounds(10, 10, 350, 25);
 		btPesquisar.setBounds(360, 10, 100, 25);
 		
-		lbRg.setBounds(10, 40, 100, 25);
+		lbRg.setBounds(10, 40, 200, 25);
 		lbCampoRg.setBounds(130, 40, 120, 25);
 		
-		lbNome.setBounds(10, 70, 100, 25);
+		lbNome.setBounds(10, 70, 200, 25);
 		lbCampoNome.setBounds(130, 70, 120, 25);
 		
-		lbEmail.setBounds(10, 100, 100, 25);
+		lbEmail.setBounds(10, 100, 200, 25);
 		lbCampoEmail.setBounds(130, 100, 120, 25);
 		
-		lbPhone.setBounds(10, 130, 100, 25);
+		lbPhone.setBounds(10, 130, 200, 25);
 		lbCampoPhone.setBounds(130, 130, 120, 25);
 		
 		lbPhone2.setBounds(10, 160, 200, 25);
 		lbCampoPhone2.setBounds(130, 160, 120, 25);
+		
+		lbEndereco.setBounds(10, 190, 200, 25);
+		lbCampoEndereco.setBounds(130, 190, 200, 25);
 		
 		tbEstadia.setBounds(300, 40, 160, 200);
 		
