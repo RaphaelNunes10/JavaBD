@@ -4,6 +4,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import janelas.HistoricoClientes;
+import janelas.Login;
+import janelas.MenuDev;
+import janelas.Reserva;
+import janelas.TelaCadastro;
+
 public class Main extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -18,10 +24,11 @@ public class Main extends JFrame {
 	 * ----------------------------------------------
 	 */
 	
-	static JFrame login =  new Login();
-	static JFrame cadastro = new TelaCadastro();
-	static JFrame reserva = new Reserva();
-	static JFrame histCli = new HistoricoClientes();
+	public static JFrame login =  new Login();
+	public static JFrame cadastro = new TelaCadastro();
+	public static JFrame reserva = new Reserva();
+	public static JFrame histCli = new HistoricoClientes();
+	public static JFrame menuDev = new MenuDev();
 
 	public static void main(String[] args) {
 		
@@ -36,6 +43,7 @@ public class Main extends JFrame {
 					TelaCadastro.definirEventos();
 					Reserva.definirEventos();
 					HistoricoClientes.definirEventos();
+					MenuDev.definirEventos();
 				}
 			});
 		} catch (ClassNotFoundException e) {
