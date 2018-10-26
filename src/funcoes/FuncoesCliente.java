@@ -59,8 +59,6 @@ public class FuncoesCliente {
 					if (rowsUpdated > 0) {
 						atualizar();
 					}
-				} else {
-					System.out.println("Nope");
 				}
 			}
 		} catch (SQLException e) {
@@ -176,6 +174,7 @@ public class FuncoesCliente {
 			int rowsInserted2 = statement2.executeUpdate();
 			if (rowsInserted > 0 && rowsInserted2 > 0) {
 				Main.reserva.setVisible(true);
+				FuncoesReserva.atualizarAdcionais();
 			}
 
 		} catch (SQLException e) {

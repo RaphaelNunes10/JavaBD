@@ -14,6 +14,11 @@ import main.Main;
 
 class ModeloAdcionais extends DefaultTableModel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public boolean isCellEditable(int row, int column) {
 		return false;
@@ -38,9 +43,13 @@ public class Reserva extends JFrame {
 	public static JTextField tfSaida = new JTextField();
 	public static JTextField tfQuarto = new JTextField();
 	
-	static DefaultTableModel modeloAdcionais = new ModeloAdcionais();
+	public static Object[][] adcionais = { { "", "" } };
+	
+	public static String[] colunasAdcionais = { "Adcional", "Valor", "Qtd ↓" };
+	
+	public static DefaultTableModel modeloAdcionais = new ModeloAdcionais();
 
-	static JTable tbAdcionais = new JTable(modeloAdcionais);
+	public static JTable tbAdcionais = new JTable(modeloAdcionais);
 
 	static JScrollPane painelScrollAdcionais = new JScrollPane(tbAdcionais);
 	
@@ -51,7 +60,7 @@ public class Reserva extends JFrame {
 	
 	public Reserva() {
 		setTitle("Controle de Clientes");
-		setBounds(0, 0, 455, 500);
+		setBounds(0, 0, 455, 430);
 		setLayout(null);
 		
 		criarElementos();

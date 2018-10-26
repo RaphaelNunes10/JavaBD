@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import funcoes.FuncoesCliente;
+import funcoes.FuncoesReserva;
 import main.Main;
 
 import java.awt.Dimension;
@@ -28,6 +29,8 @@ public class TelaCadastro extends JFrame {
 	
 	static JMenu mnCadastros = new JMenu("Cadastros");
 	static JMenuItem miReserva = new JMenuItem("Reserva");
+	static JMenuItem miProduto = new JMenuItem("Produto");
+	static JMenuItem miColaboradores = new JMenuItem("Colaboradores");
 	
 	static JMenu mnHistorico = new JMenu("Historico");
 	static JMenuItem miClientes_hist = new JMenuItem("Clientes");
@@ -101,6 +104,8 @@ public class TelaCadastro extends JFrame {
 		
 		menuBar.add(mnCadastros);
 		mnCadastros.add(miReserva);
+		mnCadastros.add(miProduto);
+		mnCadastros.add(miColaboradores);
 		
 		menuBar.add(mnHistorico);
 		mnHistorico.add(miClientes_hist);
@@ -236,6 +241,19 @@ public class TelaCadastro extends JFrame {
 		miReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.reserva.setVisible(true);
+				FuncoesReserva.atualizarAdcionais();
+			}
+		});
+		
+		miProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		miColaboradores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		
