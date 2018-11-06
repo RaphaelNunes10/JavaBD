@@ -1,6 +1,5 @@
 package funcoes;
 
-import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,8 +9,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import janelas.TelaCadastro;
+import java.sql.Connection;
 import main.Conexao;
 import main.Main;
+//import main.WebServiceCep;
 import main.WebServiceCep;
 
 import java.util.Date;
@@ -127,14 +128,79 @@ public class FuncoesCliente {
 
 	public static void inserir() {
 		String sql = "INSERT INTO Cliente VALUES (?,?,?,?,?)";
-		String sql2 = "INSERT INTO Endereco (CEP, RgCliente, Cidade, Rua, Bairro, Numero) VALUES (?,?,?,?,?,?)";
+		String sql2 = "INSERT INTO Endereco (CEP, Rg_Cliente, Cidade, Rua, Bairro, Numero) VALUES (?,?,?,?,?,?)";
+		
+                String sql3 = "SELECT valor FROM Quarto WHERE categoria =?";
+		String sql4 = "SELECT Desconto FROM colaborador WHERE cnpj=?";
+                int vlr =0;
+                int desc =0;
+                
+                
+                if (TelaCadastro.tfQuartoNum.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Digite a categoria do quarto!");
+                } else {
+                    try {
+                        new Conexao();
+						Connection conn12 = Conexao.getConnection(); //Minha conexÃ£o estÃ¡ OK
+                        new Conexao();
+						Connection conn13 = Conexao.getConnection(); //Minha conexÃ£o estÃ¡ OK
+                        
+                        PreparedStatement stmt12 = conn12.prepareStatement(sql3);
+                        PreparedStatement stmt13 = conn13.prepareStatement(sql4);
+                        
+                        stmt12.setInt(1, Integer.parseInt(TelaCadastro.tfQuartoNum.getText())); //O campo Ã© nÃºmerico
+                        stmt13.setInt(1, Integer.parseInt(TelaCadastro.tfDesc.getText())); //O campo Ã© nÃºmerico
+                        
+                        ResultSet rs12 = stmt12.executeQuery();
+                        ResultSet rs13 = stmt13.executeQuery();
 
+                        if (rs12.next()) {
+                            try {
+                               
+                                vlr = (rs12.getInt("valor"));
+                                 
+                                if (rs13.next()){
+                                    desc = (rs13.getInt("Desconto"));
+                                    JOptionPane.showMessageDialog(null, "Valor " +(vlr - desc));
+
+                                 }
+                               
+                            } catch (SQLException ex) {
+                                System.err.print("Erro ao inserir no JTextField " + ex);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Verifique o campo categoria e cnpj");
+                        }
+                        try {
+                            stmt12.close();
+                            stmt13.close();
+                            conn12.close();
+                            conn13.close();
+                            rs13.close();
+                            rs12.close();
+                        } catch (SQLException ex) {
+                            System.err.println("Erro ao fechar conexoes " + ex);
+                        }
+                    } catch (SQLException ex) {
+                        JOptionPane.showMessageDialog(null, "Erro na consulta " + ex);
+
+                    } 
+                }
+            
+                
+                
+                
+                
 		try {
 			Conexao.abrirConexao();
 
 			PreparedStatement statement = Conexao.conex.prepareStatement(sql);
 			PreparedStatement statement2 = Conexao.conex.prepareStatement(sql2);
-
+                        
+                        
+                        
+                        
+                        
 			String rg = TelaCadastro.tfRg.getText();
 			statement.setString(1, rg);
 
@@ -174,11 +240,10 @@ public class FuncoesCliente {
 			int rowsInserted2 = statement2.executeUpdate();
 			if (rowsInserted > 0 && rowsInserted2 > 0) {
 				Main.reserva.setVisible(true);
-				FuncoesReserva.atualizarAdcionais();
 			}
 
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro ao inserir dados!");
+			JOptionPane.showMessageDialog(null, "Erro ao inserir dados!\n" + e);
 		}
 	}
 
@@ -313,6 +378,55 @@ public class FuncoesCliente {
 			JOptionPane.showMessageDialog(null, "Erro ao exluir dados!");
 		}
 	}
+        
+        ///////////////////////////////////////////  CELSO MECHEU
+        
+        public void alterar(Dados dados) {
+        String sql = "UPDATE Cliente SET Nome=?, Email=?, Telefone=?, Celular=? WHERE Rg=?";
+        String sql2 = "SELECT rg FROM Cliente WHERE rg = ?";
+
+        try {
+            // Verfica se contÃ©m o cpf no BD
+            Conexao.abrirConexao();
+            PreparedStatement stmt = Conexao.conex.prepareStatement(sql2);
+
+            stmt.setInt(1, dados.getTxRG());
+
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                try {
+                    //Caso contenha o CPF modifica os DADOS
+                    Conexao.abrirConexao();
+
+                    PreparedStatement stmts = Conexao.conex.prepareStatement(sql);
+
+                    stmts.setString(1, dados.getTxNome());
+                    stmts.setString(2, dados.getTxEmail());
+                    stmts.setString(3, dados.getTxTelefone());
+                    stmts.setString(4, dados.getTxCelular());
+                    stmts.setInt(5, dados.getTxRG());
+
+                    int rowsUpdated = stmts.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Usuario atualizado com sucesso!");
+//                    if (rowsUpdated > 0) {
+//                        atualizar();              NAO PRECISA POIS UNICO CAMPO A ESTAR NO JTBLE E O NOME
+//                    }                                     POREM O NOME ESTA VINCULADO NO RG (NAO DA PRA MUDA NOME DE RG)
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, "Erro ao atualizar dados!");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "RG nao existe");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar dados!");
+        }
+
+    }
+        
+        
 
 	/**
 	 * Encerra a aplicacao.

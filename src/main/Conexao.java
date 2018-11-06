@@ -2,6 +2,8 @@ package main;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Conexao {
@@ -29,4 +31,47 @@ public class Conexao {
 			e.printStackTrace();
 		}
 	}
+        public static Connection getConnection(){
+        try{
+            Class.forName(driver);
+            return DriverManager.getConnection(url, user, senha);
+        }catch(ClassNotFoundException | SQLException e){
+            System.err.println("Erro ao conectar Banco de dados");
+            return null;
+        }
+    }
+
+    public static void closeConnection(Connection conn){
+        if(conn != null){
+            try{
+                conn.close();
+            }catch(SQLException ex){
+                System.err.println("NÃ£o foi possivel fechar a conxÃ£o");
+
+            }
+        }
+    }
+    
+    public static void closeConnection(Connection conn, PreparedStatement stmt){
+        if(stmt != null){
+            try{
+                stmt.close();
+            }catch(SQLException ex){
+                System.err.println("Erro ao fechar stmt");
+            }
+        }
+        closeConnection(conn);
+    }
+
+    public static void closeConnection(Connection conn, PreparedStatement stmt, ResultSet rs){
+        if(rs != null){
+            try{
+                rs.close();
+            }catch(SQLException ex){
+                System.err.println("Erro ao fechar rs");
+            }
+        }
+        closeConnection(conn, stmt);
+    }
+
 }

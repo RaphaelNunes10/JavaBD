@@ -1,12 +1,13 @@
 package main;
 
+import janelas.Editardados;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import janelas.HistoricoClientes;
 import janelas.Login;
-import janelas.MenuDev;
+import janelas.Produtos;
 import janelas.Reserva;
 import janelas.TelaCadastro;
 
@@ -28,7 +29,10 @@ public class Main extends JFrame {
 	public static JFrame cadastro = new TelaCadastro();
 	public static JFrame reserva = new Reserva();
 	public static JFrame histCli = new HistoricoClientes();
-	public static JFrame menuDev = new MenuDev();
+	public static JFrame produtos = new Produtos();
+	public static JFrame editarDados = new Editardados();
+//	public static JFrame ColabInser = new InsereColab();
+        
 
 	public static void main(String[] args) {
 		
@@ -43,11 +47,11 @@ public class Main extends JFrame {
 					TelaCadastro.definirEventos();
 					Reserva.definirEventos();
 					HistoricoClientes.definirEventos();
-					MenuDev.definirEventos();
+					Produtos.definirFuncoes();
 				}
 			});
 		} catch (ClassNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "Driver não encontrado");
+			JOptionPane.showMessageDialog(null, "Driver nï¿½o encontrado");
 		}
 	}
 }
